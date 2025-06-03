@@ -64,6 +64,9 @@ public interface MessageHandler extends RequestHandler {
      */
     void setXmlStr(String xmlStr);
 
+
+    void setCharset(String charset);
+
     /**
      * 是否需要响应ack
      *

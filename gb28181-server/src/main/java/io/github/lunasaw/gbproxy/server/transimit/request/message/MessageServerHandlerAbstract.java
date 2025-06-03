@@ -5,7 +5,6 @@ import javax.sip.RequestEvent;
 
 import io.github.lunasaw.sip.common.entity.DeviceSession;
 import io.github.lunasaw.sip.common.entity.ToDevice;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import gov.nist.javax.sip.message.SIPRequest;
@@ -21,8 +20,6 @@ import lombok.Data;
 @Component
 public abstract class MessageServerHandlerAbstract extends MessageHandlerAbstract {
 
-    @Autowired
-    @Lazy
     public MessageProcessorServer   messageProcessorServer;
 
     @Autowired

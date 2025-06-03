@@ -6,10 +6,10 @@
     <parent>
         <groupId>io.github.lunasaw</groupId>
         <artifactId>sip-proxy</artifactId>
-        <version>1.2.4</version>
+        <version>1.2.4-jdk8</version>
     </parent>
 
-    <version>1.2.4</version>
+    <version>1.2.4-jdk8</version>
     <artifactId>gb28181-common</artifactId>
     <packaging>jar</packaging>
     <name>gb28181-common</name>
@@ -18,8 +18,8 @@
 
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

@@ -1,5 +1,7 @@
 package io.github.lunasaw.sip.common.transmit.event.message;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.charset.Charset;
 
 import javax.sip.RequestEvent;
@@ -22,6 +24,8 @@ import lombok.Setter;
 public class MessageHandlerAbstract implements MessageHandler {
 
     private String xmlStr;
+
+    private String charset;
 
     public static <T> T parseRequest(RequestEvent event, String charset, Class<T> clazz) {
         SIPRequest sipRequest = (SIPRequest)event.getRequest();
@@ -84,6 +88,13 @@ public class MessageHandlerAbstract implements MessageHandler {
         if (StringUtils.isBlank(xmlStr)) {
             return null;
         }
-        return (T)XmlUtils.parseObj(xmlStr, clazz);
+        T result = (T)XmlUtils.parseObj(xmlStr, clazz);
+        try {
+            Method setCharset = clazz.getMethod("setCharset", String.class);
+            setCharset.invoke(result, getCharset());
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            
+        }
+        return result;
     }
 }

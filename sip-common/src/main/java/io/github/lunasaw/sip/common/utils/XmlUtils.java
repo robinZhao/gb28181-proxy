@@ -1,6 +1,9 @@
 package io.github.lunasaw.sip.common.utils;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
@@ -8,11 +11,14 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.Marshaller;
-import jakarta.xml.bind.Unmarshaller;
+import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -89,5 +95,31 @@ public class XmlUtils {
         Element root = document.getRootElement();
 
         return root.getName();
+    }
+
+    
+    public static String getXmlEncoding(byte[] content){
+         String xmlDeclaration=null;
+        try{
+            xmlDeclaration = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(content))).readLine();
+        }catch(Exception e){
+                     
+        }
+        return getXmlHeadEncoding(xmlDeclaration);
+    }
+
+        
+    public static String getXmlHeadEncoding(String xmlDeclaration){
+        if(xmlDeclaration.startsWith("<?xml")){
+            Pattern pattern = Pattern.compile("encoding=[\"']([^\"']+)[\"']");
+            Matcher matcher = pattern.matcher(xmlDeclaration);
+            if (matcher.find()) {
+                String encoding = matcher.group(1);
+                if(StringUtils.isNotBlank(encoding)){
+                    return encoding;
+                }
+            }
+        }
+        return "UTF-8";
     }
 }

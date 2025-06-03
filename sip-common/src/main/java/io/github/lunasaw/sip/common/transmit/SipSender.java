@@ -266,7 +266,7 @@ public class SipSender {
             }
             return serverTransaction;
         } catch (Exception e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 

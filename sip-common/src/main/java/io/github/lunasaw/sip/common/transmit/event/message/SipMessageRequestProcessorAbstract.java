@@ -45,13 +45,11 @@ public abstract class SipMessageRequestProcessorAbstract extends SipRequestProce
 
     public void doMessageHandForEvt(RequestEvent evt, FromDevice fromDevice) {
         SIPRequest request = (SIPRequest)evt.getRequest();
-
-        String charset = Optional.of(fromDevice).map(Device::getCharset).orElse(Constant.UTF_8);
-
-        // 解析xml
         byte[] rawContent = request.getRawContent();
+        String charset = Optional.ofNullable(XmlUtils.getXmlEncoding(rawContent)).orElse(Optional.of(fromDevice).map(FromDevice::getCharset).orElse(Constant.UTF_8));
+        // 解析xml
         String xmlStr = StringTools.toEncodedString(rawContent, Charset.forName(charset));
-
+        
         String cmdType = XmlUtils.getCmdType(xmlStr);
         String rootType = XmlUtils.getRootType(xmlStr);
         String method = request.getMethod();
@@ -66,6 +64,7 @@ public abstract class SipMessageRequestProcessorAbstract extends SipRequestProce
             return;
         }
         try {
+            messageHandler.setCharset(charset);
             messageHandler.setXmlStr(xmlStr);
             messageHandler.handForEvt(evt);
             if (messageHandler.needResponseAck()) {

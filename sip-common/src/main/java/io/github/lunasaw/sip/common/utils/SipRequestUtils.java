@@ -302,7 +302,7 @@ public class SipRequestUtils {
     }
 
     public static String getNewViaTag() {
-        return "lunaProxy" + RandomStringUtils.randomNumeric(10);
+        return Constant.TAG_PREFIX + RandomStringUtils.randomNumeric(10);
     }
 
     /**

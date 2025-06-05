@@ -71,5 +71,11 @@ public abstract class MessageServerHandlerAbstract extends MessageHandlerAbstrac
         return this.needResponse;
     }
 
+    @Override
+    public void reset(){
+        super.reset();
+        this.needResponse=true;
+    }
+
 
 }

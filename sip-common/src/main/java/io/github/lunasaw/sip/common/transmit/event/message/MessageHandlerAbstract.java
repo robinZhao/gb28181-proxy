@@ -97,4 +97,11 @@ public class MessageHandlerAbstract implements MessageHandler {
         }
         return result;
     }
+
+    @Override
+    public void reset() {
+        this.xmlStr=null;
+    }
+
+    
 }

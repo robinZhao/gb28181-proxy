@@ -74,5 +74,9 @@ public interface MessageHandler extends RequestHandler {
      */
     default boolean needResponseAck() {
         return true;
-    };
+    }
+
+    default void reset(){
+
+    }
 }

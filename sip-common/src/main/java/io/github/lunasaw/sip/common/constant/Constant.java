@@ -10,7 +10,9 @@ public class Constant {
 
     public static final String UDP = "UDP";
 
-    public static final String AGENT = "LunaSaw-GB28181-Proxy";
+    public static String AGENT = "GB28181-Proxy";
+
+    public static String TAG_PREFIX="GB28181";
 
     public static final String PASSWORD_HEADER = "AUTH_PASSWORD";
 

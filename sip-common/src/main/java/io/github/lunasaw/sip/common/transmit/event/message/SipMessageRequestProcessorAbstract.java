@@ -74,6 +74,8 @@ public abstract class SipMessageRequestProcessorAbstract extends SipRequestProce
                 } catch (Exception e) {
                     log.error("process::evt = {}, e", evt, e);
                     messageHandler.responseError(evt, Response.SERVER_INTERNAL_ERROR, e.getMessage());
+                } finally{
+                    messageHandler.reset();
                 }
              }
     }

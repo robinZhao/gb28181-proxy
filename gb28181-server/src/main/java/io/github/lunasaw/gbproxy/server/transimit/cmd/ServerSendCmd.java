@@ -274,7 +274,7 @@ public class ServerSendCmd {
      */
     public static String deviceControlGuardCmd(FromDevice fromDevice, ToDevice toDevice, String guardCmdStr) {
         DeviceControlGuard deviceControl =
-            new DeviceControlGuard(CmdTypeEnum.DEVICE_CONTROL.getType(), RandomStrUtil.getValidationCode(), fromDevice.getUserId());
+            new DeviceControlGuard(CmdTypeEnum.DEVICE_CONTROL.getType(), RandomStrUtil.getValidationCode(), toDevice.getUserId());
         deviceControl.setGuardCmd(guardCmdStr);
         return SipSender.doMessageRequest(fromDevice, toDevice, deviceControl.toString());
     }
@@ -291,7 +291,7 @@ public class ServerSendCmd {
     public static String deviceControlAlarm(FromDevice fromDevice, ToDevice toDevice, String alarmMethod, String alarmType) {
 
         DeviceControlAlarm deviceControlAlarm = new DeviceControlAlarm(CmdTypeEnum.DEVICE_CONTROL.getType(), RandomStrUtil.getValidationCode(),
-            fromDevice.getUserId());
+            toDevice.getUserId());
 
         deviceControlAlarm.setAlarmCmd("ResetAlarm");
         deviceControlAlarm.setAlarmInfo(new DeviceControlAlarm.AlarmInfo(alarmMethod, alarmType));
@@ -301,7 +301,7 @@ public class ServerSendCmd {
 
     public static String deviceControlAlarm(FromDevice fromDevice, ToDevice toDevice, DeviceControlPosition.HomePosition homePosition) {
         DeviceControlPosition deviceControlPosition =
-            new DeviceControlPosition(CmdTypeEnum.DEVICE_CONTROL.getType(), RandomStrUtil.getValidationCode(), fromDevice.getUserId());
+            new DeviceControlPosition(CmdTypeEnum.DEVICE_CONTROL.getType(), RandomStrUtil.getValidationCode(), toDevice.getUserId());
 
         return SipSender.doMessageRequest(fromDevice, toDevice, deviceControlPosition.toString());
     }
@@ -339,7 +339,7 @@ public class ServerSendCmd {
 
         DeviceConfigControl deviceConfigControl =
             new DeviceConfigControl(CmdTypeEnum.DEVICE_CONFIG.getType(), RandomStrUtil.getValidationCode(),
-                fromDevice.getUserId());
+                toDevice.getUserId());
 
         deviceConfigControl.setBasicParam(new DeviceConfigControl.BasicParam(name, expiration, heartBeatInterval, heartBeatCount));
 
@@ -358,7 +358,7 @@ public class ServerSendCmd {
 
         DeviceConfigDownload deviceConfig =
             new DeviceConfigDownload(CmdTypeEnum.CONFIG_DOWNLOAD.getType(), RandomStrUtil.getValidationCode(),
-                fromDevice.getUserId());
+                toDevice.getUserId());
 
         deviceConfig.setConfigType(configType);
 
@@ -374,7 +374,7 @@ public class ServerSendCmd {
      */
     public static String deviceControlIdr(FromDevice fromDevice, ToDevice toDevice, String cmdStr) {
         DeviceControlIFame deviceControlIFame =
-            new DeviceControlIFame(CmdTypeEnum.DEVICE_CONTROL.getType(), RandomStrUtil.getValidationCode(), fromDevice.getUserId());
+            new DeviceControlIFame(CmdTypeEnum.DEVICE_CONTROL.getType(), RandomStrUtil.getValidationCode(), toDevice.getUserId());
         String cmd = Optional.ofNullable(cmdStr).orElse("Send");
         deviceControlIFame.setIFameCmd(cmd);
         return SipSender.doMessageRequest(fromDevice, toDevice, deviceControlIFame.toString());
@@ -390,7 +390,7 @@ public class ServerSendCmd {
      */
     public static String deviceControlDragOut(FromDevice fromDevice, ToDevice toDevice, DragZoom dragZoom) {
         DeviceControlDragOut dragZoomOut =
-            new DeviceControlDragOut(CmdTypeEnum.DEVICE_CONTROL.getType(), RandomStrUtil.getValidationCode(), fromDevice.getUserId());
+            new DeviceControlDragOut(CmdTypeEnum.DEVICE_CONTROL.getType(), RandomStrUtil.getValidationCode(), toDevice.getUserId());
 
         dragZoomOut.setDragZoomOut(dragZoom);
 
@@ -407,7 +407,7 @@ public class ServerSendCmd {
      */
     public static String deviceControlDragIn(FromDevice fromDevice, ToDevice toDevice, DragZoom dragZoom) {
         DeviceControlDragIn dragZoomIn =
-            new DeviceControlDragIn(CmdTypeEnum.DEVICE_CONTROL.getType(), RandomStrUtil.getValidationCode(), fromDevice.getUserId());
+            new DeviceControlDragIn(CmdTypeEnum.DEVICE_CONTROL.getType(), RandomStrUtil.getValidationCode(), toDevice.getUserId());
 
         dragZoomIn.setDragZoomIn(dragZoom);
 
@@ -438,7 +438,7 @@ public class ServerSendCmd {
      */
     public static String deviceControlPtzCmd(FromDevice fromDevice, ToDevice toDevice, String ptzCmd) {
         DeviceControlPtz deviceControlPtz =
-            new DeviceControlPtz(CmdTypeEnum.DEVICE_CONTROL.getType(), RandomStrUtil.getValidationCode(), fromDevice.getUserId());
+            new DeviceControlPtz(CmdTypeEnum.DEVICE_CONTROL.getType(), RandomStrUtil.getValidationCode(), toDevice.getUserId());
 
         deviceControlPtz.setPtzCmd(ptzCmd);
         deviceControlPtz.setPtzInfo(new DeviceControlPtz.PtzInfo());
@@ -455,7 +455,7 @@ public class ServerSendCmd {
      */
     public static String deviceControlTeleBoot(FromDevice fromDevice, ToDevice toDevice) {
         DeviceControlTeleBoot deviceControlTeleBoot =
-            new DeviceControlTeleBoot(CmdTypeEnum.DEVICE_CONTROL.getType(), RandomStrUtil.getValidationCode(), fromDevice.getUserId());
+            new DeviceControlTeleBoot(CmdTypeEnum.DEVICE_CONTROL.getType(), RandomStrUtil.getValidationCode(), toDevice.getUserId());
 
         return SipSender.doMessageRequest(fromDevice, toDevice, deviceControlTeleBoot.toString());
     }
@@ -470,7 +470,7 @@ public class ServerSendCmd {
      */
     public static String deviceControlTeleBoot(FromDevice fromDevice, ToDevice toDevice, String recordCmd) {
         DeviceControlRecordCmd deviceControlRecordCmd =
-            new DeviceControlRecordCmd(CmdTypeEnum.DEVICE_CONTROL.getType(), RandomStrUtil.getValidationCode(), fromDevice.getUserId());
+            new DeviceControlRecordCmd(CmdTypeEnum.DEVICE_CONTROL.getType(), RandomStrUtil.getValidationCode(), toDevice.getUserId());
 
         deviceControlRecordCmd.setRecordCmd(recordCmd);
 

@@ -89,7 +89,8 @@ public class DeviceItem extends DeviceCatalog {
         public Info(Integer ptzType) {
             this.ptzType=ptzType;
         }
-
+        public Info() {
+        }
         /**
          * 云台类型(可选) 1-球机;2-半球;3-固定枪机;4-遥控枪机
          */

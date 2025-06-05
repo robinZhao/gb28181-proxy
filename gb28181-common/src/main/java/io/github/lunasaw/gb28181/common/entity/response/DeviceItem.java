@@ -68,11 +68,9 @@ public class DeviceItem extends DeviceCatalog {
      */
     @XmlElement(name = "Password")
     private String password;
-    /**
-     * 云台类型(可选) 1-球机;2-半球;3-固定枪机;4-遥控枪机
-     */
-    @XmlElement(name = "PTZType")
-    private Integer ptzType;
+
+    @XmlElement(name = "Info")
+    private Info info;
     /**
      * 经度(可选)
      */
@@ -84,6 +82,21 @@ public class DeviceItem extends DeviceCatalog {
     @XmlElement(name = "Latitude")
     private Double  latitude;
 
+    @Getter
+    @Setter
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static class Info{
+        public Info(Integer ptzType) {
+            this.ptzType=ptzType;
+        }
+
+        /**
+         * 云台类型(可选) 1-球机;2-半球;3-固定枪机;4-遥控枪机
+         */
+        @XmlElement(name = "PTZType")
+        private Integer ptzType;
+    }
+        
     public static DeviceItem getInstanceExample(String deviceId) {
         Assert.notNull(deviceId, "设备ID不能为空");
         Assert.isTrue(deviceId.length() == 20, "设备ID长度必须为20位");
@@ -106,7 +119,7 @@ public class DeviceItem extends DeviceCatalog {
         deviceItem.setIpAddress(SystemInfoUtil.getNoLoopbackIP());
         deviceItem.setPort(8116);
         deviceItem.setPassword("luna");
-        deviceItem.setPtzType(3);
+        deviceItem.setInfo(new Info(3));
         deviceItem.setStatus("ok");
         deviceItem.setLongitude(121.472644);
         deviceItem.setLatitude(31.231706);

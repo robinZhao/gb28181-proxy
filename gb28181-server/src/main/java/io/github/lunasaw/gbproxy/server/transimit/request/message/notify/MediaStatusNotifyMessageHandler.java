@@ -43,6 +43,10 @@ public class MediaStatusNotifyMessageHandler extends MessageServerHandlerAbstrac
 
     @Override
     public void handForEvt(RequestEvent event) {
+        if(!this.preCheck(event)){
+            this.setNeedResponse(false);
+            return;
+        }
         DeviceSession deviceSession = getDeviceSession(event);
 
         String userId = deviceSession.getUserId();

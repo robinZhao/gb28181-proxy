@@ -42,7 +42,8 @@ public class AlarmNotifyMessageHandler extends MessageServerHandlerAbstract {
 
     @Override
     public void handForEvt(RequestEvent event) {
-        if (!sipUserGenerate.checkDevice(event)) {
+        if(!this.preCheck(event)){
+            this.setNeedResponse(false);
             return;
         }
         DeviceSession deviceSession = getDeviceSession(event);

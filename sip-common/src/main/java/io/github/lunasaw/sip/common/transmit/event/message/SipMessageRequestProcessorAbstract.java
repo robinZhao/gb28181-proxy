@@ -60,20 +60,22 @@ public abstract class SipMessageRequestProcessorAbstract extends SipRequestProce
         }
 
         MessageHandler messageHandler = messageHandlerMap.get(cmdType);
-        if (messageHandler == null) {
-            return;
-        }
-        try {
-            messageHandler.setCharset(charset);
-            messageHandler.setXmlStr(xmlStr);
-            messageHandler.handForEvt(evt);
-            if (messageHandler.needResponseAck()) {
-                messageHandler.responseAck(evt);
+            if (messageHandler == null) {
+                return;
             }
-        } catch (Exception e) {
-            log.error("process::evt = {}, e", evt, e);
-            messageHandler.responseError(evt, Response.SERVER_INTERNAL_ERROR, e.getMessage());
-        }
+            synchronized(messageHandler){
+                try {
+                    messageHandler.setCharset(charset);
+                    messageHandler.setXmlStr(xmlStr);
+                    messageHandler.handForEvt(evt);
+                    if (messageHandler.needResponseAck()) {
+                        messageHandler.responseAck(evt);
+                    }
+                } catch (Exception e) {
+                    log.error("process::evt = {}, e", evt, e);
+                    messageHandler.responseError(evt, Response.SERVER_INTERNAL_ERROR, e.getMessage());
+                }
+             }
     }
 
 }

@@ -22,6 +22,8 @@ public abstract class MessageServerHandlerAbstract extends MessageHandlerAbstrac
 
     public MessageProcessorServer   messageProcessorServer;
 
+    protected boolean needResponse=true;
+
     @Autowired
     protected SipUserGenerateServer sipUserGenerate;
 
@@ -62,5 +64,12 @@ public abstract class MessageServerHandlerAbstract extends MessageHandlerAbstrac
 
         return true;
     }
+
+    
+    @Override
+    public boolean needResponseAck() {
+        return this.needResponse;
+    }
+
 
 }

@@ -32,6 +32,10 @@ public class BaseMessageServerHandler extends MessageServerHandlerAbstract {
 
     @Override
     public void handForEvt(RequestEvent event) {
+        if(this.preCheck(event)){
+            this.setNeedResponse(false);
+            return;
+        }
         log.info("handForEvt::event = {}", event);
     }
 
@@ -40,5 +44,5 @@ public class BaseMessageServerHandler extends MessageServerHandlerAbstract {
         return cmdType;
     }
 
-
+ 
 }

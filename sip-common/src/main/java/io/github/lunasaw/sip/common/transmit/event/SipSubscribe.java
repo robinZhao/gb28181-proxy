@@ -1,17 +1,19 @@
 package io.github.lunasaw.sip.common.transmit.event;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import java.time.Instant;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 import javax.sip.RequestEvent;
 import javax.sip.ResponseEvent;
 import javax.sip.header.CallIdHeader;
 import javax.sip.message.Response;
-import java.time.Instant;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
+
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lin
@@ -106,7 +108,10 @@ public class SipSubscribe {
         }
         for (String key : errorTimeSubscribes.keySet()) {
             if (errorTimeSubscribes.get(key).isBefore(instant)) {
-                errorSubscribes.remove(key);
+                Event e = errorSubscribes.remove(key);
+                EventResult<Instant> result = new EventResult(Instant.now());
+                result.setType(EventResultType.scheduledCleard);
+                e.response(result);
                 errorTimeSubscribes.remove(key);
             }
         }

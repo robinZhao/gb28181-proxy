@@ -11,6 +11,8 @@ public enum EventResultType {
     ack,
     // 超时
     timeout,
+    //
+    scheduledCleard,
     // 回复
     response,
     // 事务已结束
